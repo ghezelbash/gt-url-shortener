@@ -26,13 +26,17 @@
 </div>
 <script>
     function copyToClipboard(url, icon) {
+        if (!navigator.clipboard) {
+            console.error('Clipboard API not supported probably because you are not running your website on HTTPS');
+            return;
+        }
         navigator.clipboard.writeText(url).then(function() {
             const originalIcon = icon.className;
             icon.className = 'fas fa-check text-green-500';
             setTimeout(() => {
                 icon.className = originalIcon;
             }, 2000);
-        }, function(err) {
+        }).catch(function(err) {
             console.error('Could not copy text: ', err);
         });
     }
