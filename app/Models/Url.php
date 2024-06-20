@@ -34,4 +34,9 @@ class Url extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getShortenedUrlAttribute($value): string
+    {
+        return url($value);
+    }
 }

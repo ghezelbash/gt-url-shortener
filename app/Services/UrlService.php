@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 class UrlService
 {
@@ -26,6 +27,24 @@ class UrlService
     public function getByShortenedUrl(string $shortenedUrl): Url
     {
         return $this->url->where('shortened_url', $shortenedUrl)->firstOrFail();
+    }
+
+    /**
+     * Get Url by UUID and UserId
+     *
+     * @param string $uuid
+     * @param int $userId
+     * @return Url
+     */
+    public function getByUuid(string $uuid, int $userId): Url
+    {
+        try {
+            $url = $this->getByUuidAndUserId($uuid, $userId);
+        } catch (\Exception $exception) {
+            throw new ResourceNotFoundException("URL not found");
+        }
+
+        return $url;
     }
 
     /**
@@ -92,7 +111,7 @@ class UrlService
             $url->original_url = $data['original_url'];
             $url->save();
         } catch (\Exception $exception) {
-            throw new InvalidArgumentException("URL not found");
+            throw new ResourceNotFoundException("URL not found");
         }
 
         return $url->fresh();
@@ -112,7 +131,7 @@ class UrlService
             $url = $this->getByUuidAndUserId($uuid, $userId);
             $url->delete();
         } catch (\Exception $exception) {
-            throw new InvalidArgumentException("URL not found");
+            throw new ResourceNotFoundException("URL not found");
         }
     }
 

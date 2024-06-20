@@ -1,0 +1,1184 @@
+{
+	"info": {
+		"_postman_id": "69feb484-03f0-49e6-ac2b-ca17942ca8ac",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20143753"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var token = JSON.parse(responseBody).token;",
+									"pm.collectionVariables.set(\"token\", token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"YOUR_EMAIL_ADDRESS\",\n    \"password\": \"YOUR_PASSWORD\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/token/generate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								"generate"
+							]
+						},
+						"description": "By addiing email and password as json data, this request generates an api access token."
+					},
+					"response": [
+						{
+							"name": "Generate - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"YOUR_EMAIL_ADDRESS\",\n    \"password\": \"YOUR_PASSWORD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/token/generate",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"generate"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Jun 2024 22:20:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"9|z51uN7s1x6A9IwS7GatAALD6z6U9DYysVsrICQPz3b02e5a4\"\n}"
+						},
+						{
+							"name": "Generate - Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"WRONG_EMAIL\",\n    \"password\": \"WRONG_PASSWORD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/token/generate",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"generate"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Jun 2024 22:22:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid credentials\"\n}"
+						},
+						{
+							"name": "Generate - Validation Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"\",\n    \"password\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/token/generate",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"token",
+										"generate"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Jun 2024 23:32:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": {\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Get All URLs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/urls",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"urls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All URLs - Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/urls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:18:53 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"uuid\": \"d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3\",\n        \"original_url\": \"https://www.instagram.com/\",\n        \"shortened_url\": \"http://localhost:8000/6a5cz0j\",\n        \"created_at\": \"2024-06-19T22:55:49.000000Z\",\n        \"updated_at\": \"2024-06-19T22:55:49.000000Z\"\n    },\n    {\n        \"uuid\": \"cb236eac-8a7e-4d98-acea-f7371e494728\",\n        \"original_url\": \"https://www.facebook.com/\",\n        \"shortened_url\": \"http://localhost:8000/z45nv2b\",\n        \"created_at\": \"2024-06-19T23:18:48.000000Z\",\n        \"updated_at\": \"2024-06-19T23:18:48.000000Z\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get URL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/urls",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"urls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get URL - Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "5a93d8ec-a2f2-4605-b540-0eda5259cad0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:57:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uuid\": \"5a93d8ec-a2f2-4605-b540-0eda5259cad0\",\n    \"original_url\": \"https://www.instagram.com/\",\n    \"shortened_url\": \"http://localhost:8000/9dcnd4r\",\n    \"created_at\": \"2024-06-19T23:23:29.000000Z\",\n    \"updated_at\": \"2024-06-19T23:23:29.000000Z\"\n}"
+				},
+				{
+					"name": "Get URL - Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "5a93d8ec-a2f2-4605-b540-0eda5259cad"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:57:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"URL not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Store a new URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"original_url\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/urls",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"urls"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Store - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"https://www.instagram.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:20:22 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uuid\": \"8c92d11b-df63-497d-b21b-954c5c74a2c2\",\n    \"original_url\": \"https://www.instagram.com/\",\n    \"shortened_url\": \"http://localhost:8000/ukfdnem\",\n    \"created_at\": \"2024-06-19T23:20:22.000000Z\",\n    \"updated_at\": \"2024-06-19T23:20:22.000000Z\"\n}"
+				},
+				{
+					"name": "Store - Validation Error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:30:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"The original url field is required.\"\n}"
+				},
+				{
+					"name": "Store - Invalid Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"https://www.instagram.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:22:38 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update an existing URL",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"original_url\": \"https://www.instagram.com/e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/urls/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"urls",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update - Success",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"https://www.instagram.com/e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:29:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"uuid\": \"d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3\",\n    \"original_url\": \"https://www.instagram.com/e\",\n    \"shortened_url\": \"http://localhost:8000/6a5cz0j\",\n    \"created_at\": \"2024-06-19T22:55:49.000000Z\",\n    \"updated_at\": \"2024-06-19T23:29:20.000000Z\"\n}"
+				},
+				{
+					"name": "Update - Not Found",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"https://www.instagram.com/er\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "cde013b0-5e86-47e1-8bb9-2d10e5aeaf91"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:27:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"URL not found\"\n}"
+				},
+				{
+					"name": "Update - Invalid URL",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"original_url\": \"instagram\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:28:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"The original url field must be a valid URL.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an existing URL",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/urls/:uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"urls",
+						":uuid"
+					],
+					"variable": [
+						{
+							"key": "uuid",
+							"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete - Success",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:40:24 GMT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Delete - Not found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/urls/:uuid",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"urls",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "d4832cbf-f2c1-4ba8-af8c-c2c1c68839c3"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.8"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 19 Jun 2024 23:42:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"URL not found\"\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "5|isLEJYoONcj72FkyKWOHRau2ujGd4lgjiUoMj0Yte119dc02",
+			"type": "string"
+		}
+	]
+}
