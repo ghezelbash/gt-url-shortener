@@ -155,3 +155,10 @@ Content-Type: application/json
 Authorization: Bearer your-api-token
 Content-Type: application/json
 ```
+
+# Tests
+#### You can simply run all tests via this command:
+
+```bash
+php artsian test
+```
